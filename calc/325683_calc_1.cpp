@@ -15,17 +15,15 @@ int main() {
 	int value_1, value_2; // Wartosci zdejmowane ze stosow
 
 	// Wczytywanie danych
-	while(std::cin.get(token)) {
+	while(std::cin >> token) {
 		switch (token) {
-		case '(':
-		case ' ':
-			break;
 		// Operatory laduje na stos
 		case '+':
 		case '*':
 		case '/':
 		case '-':
 			operator_stack.push(token);
+		case '(':
 			break;
 		case ')':
 		    // Zdejmuje operatory ze stosow i wykonuje dzialanie
@@ -50,7 +48,7 @@ int main() {
 				// Sprawdzanie dzielenia przez 0
 				if (!value_2) {
 					std::cout << "NaN";
-					exit(1);
+					return 1;
 				}
 				value_stack.push(value_1 / value_2);
 				break;
@@ -62,6 +60,6 @@ int main() {
 			break;
 		}
 	}
-	std::cout << value_stack.top() << std::endl;
+	std::cout << value_stack.top() << '\n';
 	return 0;
 }
