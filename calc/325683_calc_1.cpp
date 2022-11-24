@@ -12,49 +12,61 @@ int main() {
 	// Deklaracja zmiennych
 	std::stack<int> value_stack;
 	std::stack<char> operator_stack;
-	char token;
+	char token, operator_token;
+	int value_1, value_2, bracket_count = 0; // Wartosci zdejmowane ze stosow
 	// Wczytywanie danych
-	while (std::cin >> token) {
-		if (token == '(') {
-			// nic nie robimy
-			continue;
-		}
-		else if (token == ')') {
-			// Zdejmujemy wartosci i operator ze stosow
-			int value2 = value_stack.top();
+	do {
+		std::cin.get(token);
+		switch (token) {
+		case '(':
+			bracket_count++;
+			break;
+		case ')':
+			bracket_count--;
+			value_2 = value_stack.top();
 			value_stack.pop();
-			int value1 = value_stack.top();
+			value_1 = value_stack.top();
 			value_stack.pop();
-			char op = operator_stack.top();
+			operator_token = operator_stack.top();
 			operator_stack.pop();
-			// Wykonujemy operacje
-			int result;
-			switch (op) {
-				case '+':
-					result = value1 + value2;
-					break;
-				case '-':
-					result = value1 - value2;
-					break;
-				case '*':
-					result = value1 * value2;
-					break;
-				case '/':
-					result = value1 / value2;
-					break;
-				default:
-					std::cout << "Nieznany operator: " << op << std::endl;
-					return 1;
-			}
+			// Wykonujemy operacje na zdjetych wartosciach
 			// Wynik wraca na stos
-			value_stack.push(result);
-		}
+			switch (operator_token) {
+			case '+':
+				value_stack.push(value_1 + value_2);
+				break;
+			case '-':
+				value_stack.push(value_1 - value_2);
+				break;
+			case '*':
+				value_stack.push(value_1 * value_2);
+				break;
+			case '/':
+				if (!value_2) {
+					std::cout << "NaN";
+					exit(1);
+				}
+				value_stack.push(value_1 / value_2);
+				break;
+			}
+			break;
 		// Operatory i cyfry ladujemy na stos
-		else if (token == '+' || token == '-' || token == '*' || token == '/') {
+		case '+':
+		case '*':
+		case '/':
 			operator_stack.push(token);
-		}
-		else {
+			break;
+		case '-':
+			operator_stack.push('-');
+			break;
+		case ' ':
+			break;
+		default:
 			value_stack.push(token - '0');
+			break;
 		}
-	}
+	} while (bracket_count);
+	// Wypisujemy wynik
+	std::cout << value_stack.top() << std::endl;
+	return 0;
 }
