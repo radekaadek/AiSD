@@ -13,13 +13,14 @@ int main() {
 	std::stack<int> value_stack;
 	std::stack<char> operator_stack;
 	char token, operator_token;
-	int value_1, value_2, bracket_count = 0; // Wartosci zdejmowane ze stosow
+	int value_1, value_2; // Wartosci zdejmowane ze stosow
+	uint64_t bracket_count = 0;
 	// Wczytywanie danych
-	do {
-		std::cin.get(token);
+	while(std::cin.get(token)) {
 		switch (token) {
 		case '(':
 			bracket_count++;
+		case ' ':
 			break;
 		case ')':
 			bracket_count--;
@@ -59,13 +60,11 @@ int main() {
 		case '-':
 			operator_stack.push('-');
 			break;
-		case ' ':
-			break;
 		default:
 			value_stack.push(token - '0');
 			break;
 		}
-	} while (bracket_count);
+	}
 	// Wypisujemy wynik
 	std::cout << value_stack.top() << std::endl;
 	return 0;
