@@ -1,0 +1,52 @@
+/*
+
+Napisz program, który na podstawie mapy nieba zlicza liczbę konstelacji. Przykładowa mapa nieba:
+0 1 0 0 0
+1 1 0 0 0
+1 1 0 0 1
+0 0 1 1 1
+1 0 0 0 0
+Mapa jest kwadratem wypełnionym liczbami 1 i 0. Liczba 1 oznacza gwiazdę, 0 puste miejsce.Aby gwiazdy należały do jednej konstelacji muszą ze sobą sąsiadować poziomo lub pionowo. Algorytm powinien zliczyć liczbę konstelacji oraz wyznaczyć rozmiar największej z nich.Na powyższej mapie znajdują się3 konstelacje, a największa ma rozmiar 5.
+
+Wejście
+Program  czyta dane  ze  standardowego wejścia. W pierwszej linii znajduje się pojedyncza liczba N oznaczająca rozmiar kwadratowej mapy nieba(1 ≤N ≤ 10000). Następnie znajdują się kolejne linie mapy z liczbami 1 i 0rozdzielone spacjami.
+
+Wyjście
+Program powinien wypisać na standardowe wyjście dwie liczby rozdzielone pojedynczą spacją. Pierwsza to liczba konstelacji, druga to liczba gwiazd w największej z nich
+
+Przykłady
+
+1.Wejście: 5
+
+0 1 0 0 0
+1 1 0 0 0
+1 1 0 0 1
+0 0 1 1 1
+1 0 0 0 0
+
+Wyjście: 3 5
+
+2.Wejście: 6
+
+1 1 1 1 1 1
+0 0 0 0 0 1
+1 1 1 1 1 1
+1 0 0 0 0 0
+1 1 1 1 1 1
+0 0 0 0 0 1
+
+Wyjście: 1 21
+
+Wejście: 7
+
+0 1 1 0 0 0 0
+0 1 1 0 1 0 0
+1 1 1 0 1 0 1
+0 0 0 0 1 1 1
+1 0 0 0 0 0 0
+0 1 1 1 1 1 0
+0 1 0 1 1 0 0
+
+Wyjście: 4 8
+
+*/
