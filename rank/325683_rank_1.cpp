@@ -12,10 +12,6 @@ int main() {
     uint32_t n;
     std::cin >> n;
 
-    // Check if there are any scores
-    if (!n)
-        return 0;
-
     std::vector<uint32_t> scores(n);
     for (uint32_t i = 0; i < n; i++)
         std::cin >> scores[i];
@@ -23,7 +19,6 @@ int main() {
     // Make a copy of the scores
     std::vector<uint32_t> sorted_scores = scores;
 
-    // Sort it in descending order
     std::sort(sorted_scores.begin(), sorted_scores.end(), std::greater<uint32_t>());
 
     // Create a map that maps a score to its rank
@@ -34,7 +29,7 @@ int main() {
     score_to_rank[sorted_scores[0]] = rank;
 
     // Iterate over the sorted scores
-    for (size_t i = 1; i < sorted_scores.size(); i++) {
+    for (size_t i = 1; i < n; i++) {
         // If the current score is different from the previous score
         // increment the rank
         if (sorted_scores[i] != sorted_scores[i - 1])
@@ -45,8 +40,9 @@ int main() {
     }
 
     // Print the output
-    for (const uint32_t& score : scores)
-        std::cout << score_to_rank[score] << ' ';
+    std::cout << score_to_rank[scores[0]];
+    for (size_t i = 1; i < n; i++)
+        std::cout << " " << score_to_rank[scores[i]];
 
     return 0;
 }
