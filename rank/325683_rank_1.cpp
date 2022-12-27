@@ -18,7 +18,6 @@ int main() {
 
     // Make a copy of the scores
     std::vector<uint32_t> sorted_scores = scores;
-
     std::sort(sorted_scores.begin(), sorted_scores.end(), std::greater<uint32_t>());
 
     // Create a map that maps a score to its rank
