@@ -32,10 +32,7 @@ int main() {
         // If the current score is different from the previous score
         // increment the rank
         if (sorted_scores[i] != sorted_scores[i - 1])
-            rank++;
-
-        // Set the rank of the current score
-        score_to_rank[sorted_scores[i]] = rank;
+            score_to_rank[sorted_scores[i]] = i + 1;
     }
 
     // Print the output
