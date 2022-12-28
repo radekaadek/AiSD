@@ -24,15 +24,14 @@ int main() {
     std::unordered_map<uint32_t, uint32_t> score_to_rank;
 
     // Set the rank of the first score
-    uint32_t rank = 1;
-    score_to_rank[sorted_scores[0]] = rank;
+    score_to_rank[sorted_scores[0]] = 1;
 
     // Iterate over the sorted scores
     for (size_t i = 1; i < n; i++) {
         // If the current score is different from the previous score
         // increment the rank
         if (sorted_scores[i] != sorted_scores[i - 1])
-            score_to_rank[sorted_scores[i]] = i + 1;
+            score_to_rank.emplace(sorted_scores[i], i + 1);
     }
 
     // Print the output
