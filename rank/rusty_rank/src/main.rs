@@ -7,38 +7,55 @@ use std::io;
 
 fn main() {
     // Read input
-    let mut input: String = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-    let n: usize = input.trim().parse().unwrap();
-    io::stdin().read_line(&mut input).unwrap();
-    let scores: Vec<u32> = input
-        .split_whitespace()
-        .map(|x: &str| x.parse().unwrap())
-        .collect();
+    let mut input_n: String = String::new();
+    io::stdin().read_line(&mut input_n).ok().expect("First line not found");
+
+    // Assert that first line is a number in range 1..10000000
+    let n: usize = input_n.trim().parse().ok().expect("First line is not a number");
+
+    // Assert that n is in range 1..10000000, if not, tell user
+    if n == 0 || n > 10000000 {
+        panic!("First line is not in range 1..10000000");
+    }
     
+    let mut number_input: String = String::new();
+
+    // Read second line
+    io::stdin().read_line(&mut number_input).ok().expect("Second line not found");
+    let scores: Vec<u32> = {
+        let mut scores: Vec<u32> = Vec::new();
+        for score in number_input.trim().split_whitespace() {
+            scores.push(score.parse().ok().expect(format!("{} is not a valid number", score).as_str()));
+        }
+        scores
+    };
+
+    // Assert that number of scores is equal to n
+    if scores.len() != n {
+        panic!("Number of scores is not equal to n");
+    }
+
     // Sort scores
     let sorted_scores:Vec<u32> = {
-        let mut scores = scores.clone();
-        scores.sort();
-        scores.reverse();
-        scores
+        let mut sorted_scores: Vec<u32> = scores.clone();
+        sorted_scores.sort();
+        sorted_scores.reverse();
+        sorted_scores
     };
     
     // Create a hashmap of scores and their rank:
     // Score -> Rank
     let mut score_rank: std::collections::HashMap<u32, u32> = std::collections::HashMap::new();
-    // Set the rank of the first score to 1
     score_rank.insert(sorted_scores[0], 1);
-    // Set the rank of the rest of the scores
-    for i in 1..n {
+    for i in 1..sorted_scores.len() {
         if sorted_scores[i] != sorted_scores[i-1] {
-            score_rank.insert(sorted_scores[i], (i+1) as u32);
+            score_rank.insert(sorted_scores[i], i as u32 + 1);
         }
     }
 
-    // Print the rank of each score
+    // Print output without a trailing space
     print!("{}", score_rank.get(&scores[0]).unwrap());
-    for i in 1..n {
+    for i in 1..scores.len() {
         print!(" {}", score_rank.get(&scores[i]).unwrap());
     }
 }
