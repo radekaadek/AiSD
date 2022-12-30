@@ -5,7 +5,7 @@ ZadanieKonkurs programistyczny zgromadził dużą liczbę uczestników, którzy 
 
 use std::io;
 
-fn main() {
+fn solve() {
     // Read input
     let mut input_n: String = String::new();
     io::stdin().read_line(&mut input_n).ok().expect("First line not found");
@@ -58,4 +58,8 @@ fn main() {
     for i in 1..scores.len() {
         print!(" {}", score_rank.get(&scores[i]).unwrap());
     }
+}
+
+fn main() {
+    solve();
 }
